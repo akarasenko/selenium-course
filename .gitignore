@@ -1,3 +1,8 @@
 /.idea/
 /.gradle/
 /chromedriver.exe
+/build/
+/IEDriverServer.exe
+/geckodriver.exe
+/debug.log
+/gradle/
