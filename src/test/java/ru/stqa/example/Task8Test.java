@@ -28,7 +28,7 @@ public class Task8Test {
     public void task7Test() {
         driver.navigate().to("http://localhost/litecart/en/");
 
-        List<WebElement> items = driver.findElements(By.cssSelector(".image-wrapper"));
+        List<WebElement> items = driver.findElements(By.cssSelector(".product"));
 
         for (WebElement item : items) {
             List<WebElement> icons = item.findElements(By.cssSelector(".sticker"));
