@@ -35,16 +35,20 @@ public class Task10Test {
         var campaignPriceMain = campaignPriceElementMain.getText();
 
         var regularPriceColorMain = regularPriceElementMain.getCssValue("color");
-        var gColorRegularPriceMain = regularPriceColorMain.substring(10, 13);
-        var bColorRegularPriceMain = regularPriceColorMain.substring(15, 18);
-        Assert.assertEquals(gColorRegularPriceMain, bColorRegularPriceMain);
+        var rgbRegularPriceColorMain = regularPriceColorMain.replaceAll("[^\\d. ]","").split(" ");
+        Assert.assertEquals(rgbRegularPriceColorMain[1], rgbRegularPriceColorMain[2]);
+
+        var campaignPriceColorMain = campaignPriceElementMain.getCssValue("color");
+        var rgbCampaignPriceColorMain = campaignPriceColorMain.replaceAll("[^\\d. ]","").split(" ");
+        Assert.assertEquals(0, Integer.parseInt(rgbCampaignPriceColorMain[1]));
+        Assert.assertEquals(0, Integer.parseInt(rgbCampaignPriceColorMain[2]));
 
         var textDecorationRegularPriceMain = regularPriceElementMain.getCssValue("text-decoration");
         Assert.assertTrue(textDecorationRegularPriceMain.contains("line-through"));
 
-        var sizeRegularPriceMain = regularPriceElementMain.getSize();
-        var sizeCampaignPriceMain = campaignPriceElementMain.getSize();
-        Assert.assertTrue(sizeCampaignPriceMain.getHeight() > sizeRegularPriceMain.getHeight());
+        var fontRegularPriceMain = Double.parseDouble(regularPriceElementMain.getCssValue("font-size").replaceAll("[^\\d.]",""));
+        var fontCampaignPriceMain = Double.parseDouble(campaignPriceElementMain.getCssValue("font-size").replaceAll("[^\\d.]",""));
+        Assert.assertTrue(fontCampaignPriceMain > fontRegularPriceMain);
 
         product.click();
 
@@ -64,12 +68,18 @@ public class Task10Test {
         var bColorRegularPriceProduct = regularPriceColorProduct.substring(15, 18);
         Assert.assertEquals(gColorRegularPriceProduct, bColorRegularPriceProduct);
 
+        var campaignPriceColorProduct = campaignPriceElementProduct.getCssValue("color");
+        var rgbCampaignPriceColorProduct = campaignPriceColorProduct.replaceAll("[^\\d. ]","").split(" ");
+        Assert.assertEquals(0, Integer.parseInt(rgbCampaignPriceColorProduct[1]));
+        Assert.assertEquals(0, Integer.parseInt(rgbCampaignPriceColorProduct[2]));
+
+
         var textDecorationRegularPriceProduct = regularPriceElementProduct.getCssValue("text-decoration");
         Assert.assertTrue(textDecorationRegularPriceProduct.contains("line-through"));
 
-        var sizeRegularPriceProduct = regularPriceElementProduct.getSize();
-        var sizeCampaignPriceProduct = campaignPriceElementProduct.getSize();
-        Assert.assertTrue(sizeCampaignPriceProduct.getHeight() > sizeRegularPriceProduct.getHeight());
+        var fontRegularPriceProduct = Double.parseDouble(regularPriceElementProduct.getCssValue("font-size").replaceAll("[^\\d.]",""));
+        var fontCampaignPriceProduct = Double.parseDouble(campaignPriceElementProduct.getCssValue("font-size").replaceAll("[^\\d.]",""));
+        Assert.assertTrue(fontCampaignPriceProduct > fontRegularPriceProduct);
     }
 
     @After
