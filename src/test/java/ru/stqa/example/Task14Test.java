@@ -38,24 +38,19 @@ public class Task14Test {
         driver.findElement(By.xpath("//table[@class='dataTable']//a[@title='Edit']")).click();
 
         initWindow = driver.getWindowHandle();
-        clickToOpenLinkAndCheckUrl("//input[@name='iso_code_2']/..//a[@target='_blank']", "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2");
-        clickToOpenLinkAndCheckUrl("//input[@name='iso_code_3']/..//a[@target='_blank']", "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3");
-        clickToOpenLinkAndCheckUrl("//input[@name='tax_id_format']/..//a[@target='_blank']", "https://en.wikipedia.org/wiki/Regular_expression");
-        clickToOpenLinkAndCheckUrl("//textarea[@name='address_format']/..//a[@target='_blank']", "https://www.informatica.com/products/data-quality/data-as-a-service/address-verification/address-formats.html");
-        clickToOpenLinkAndCheckUrl("//input[@name='postcode_format']/..//a[@target='_blank']", "https://en.wikipedia.org/wiki/Regular_expression");
-        clickToOpenLinkAndCheckUrl("//input[@name='currency_code']/..//a[@target='_blank']", "https://en.wikipedia.org/wiki/List_of_countries_and_capitals_with_currency_and_language");
-        clickToOpenLinkAndCheckUrl("//input[@name='phone_code']/..//a[@target='_blank']", "https://en.wikipedia.org/wiki/List_of_country_calling_codes");
+
+        var linkItems = driver.findElements(By.xpath("//td[@id='content']//form//a[@target='_blank']"));
+
+        for (var item : linkItems) {
+            var oldWindows = driver.getWindowHandles();
+            item.click();
+            String newWindow = (String) wait.until(thereIsWindowOtherThan(oldWindows));
+            driver.switchTo().window(newWindow);
+            driver.close();
+            driver.switchTo().window(initWindow);
+        }
     }
 
-    public void clickToOpenLinkAndCheckUrl(String xPathLink, String linkUrl) {
-        var oldWindows = driver.getWindowHandles();
-        driver.findElement(By.xpath(xPathLink)).click();
-        String newWindow = (String) wait.until(thereIsWindowOtherThan(oldWindows));
-        driver.switchTo().window(newWindow);
-        Assert.assertEquals( driver.getCurrentUrl(), linkUrl);
-        driver.close();
-        driver.switchTo().window(initWindow);
-    }
 
     public ExpectedCondition<String> thereIsWindowOtherThan (Set<String> oldWindows) {
         return new ExpectedCondition<String>() {
