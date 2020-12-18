@@ -1,4 +1,4 @@
-package ru.stqa.example;
+package ru.stqa.example.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -8,9 +8,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 
 public class CartPage extends BasePage {
-    private String productTableXpath = "//div[@id='order_confirmation-wrapper']//tbody//tr//td[@class='item']";
-    private String nameXpath = "//form[@name='cart_form']//div//p//a//strong";
-    private String deleteXpath = "//button[@name='remove_cart_item']";
+    public String productTableXpath = "//div[@id='order_confirmation-wrapper']//tbody//tr//td[@class='item']";
+    public String nameXpath = "//form[@name='cart_form']//div//p//a//strong";
+    public String deleteXpath = "//button[@name='remove_cart_item']";
 
     public CartPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
@@ -20,7 +20,7 @@ public class CartPage extends BasePage {
         return driver.findElements(By.xpath(productTableXpath));
     }
 
-    public WebElement productName () {
+    public WebElement selectedProductName() {
         return driver.findElement(By.xpath(nameXpath));
     }
 

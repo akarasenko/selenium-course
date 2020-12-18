@@ -1,4 +1,4 @@
-package ru.stqa.example;
+package ru.stqa.example.tests;
 
 import org.junit.After;
 import org.junit.Before;

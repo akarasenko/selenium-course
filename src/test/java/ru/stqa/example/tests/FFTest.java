@@ -1,23 +1,22 @@
-package ru.stqa.example;
+package ru.stqa.example.tests;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
-public class chromeTest {
+public class FFTest {
     private WebDriver driver;
 
     @Before
     public void start() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("start-maximized");
-        driver = new ChromeDriver(options);
-        System.out.println(((HasCapabilities)driver).getCapabilities());
+        DesiredCapabilities caps = new DesiredCapabilities();
+        caps.setCapability(FirefoxDriver.MARIONETTE, true);
+        driver = new FirefoxDriver(caps);
     }
 
     @Test
@@ -26,7 +25,7 @@ public class chromeTest {
         driver.findElement(By.name("username")).sendKeys("admin");
         driver.findElement(By.name("password")).sendKeys("password");
         driver.findElement(By.name("login")).click();
-     }
+    }
 
     @After
     public void stop() {

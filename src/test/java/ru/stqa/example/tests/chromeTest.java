@@ -1,21 +1,23 @@
-package ru.stqa.example;
+package ru.stqa.example.tests;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
-public class IETest {
+public class chromeTest {
     private WebDriver driver;
 
     @Before
     public void start() {
-        DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability(InternetExplorerDriver.REQUIRE_WINDOW_FOCUS, true);
-        driver = new InternetExplorerDriver(caps);
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("start-maximized");
+        driver = new ChromeDriver(options);
+        System.out.println(((HasCapabilities)driver).getCapabilities());
     }
 
     @Test
@@ -24,7 +26,7 @@ public class IETest {
         driver.findElement(By.name("username")).sendKeys("admin");
         driver.findElement(By.name("password")).sendKeys("password");
         driver.findElement(By.name("login")).click();
-    }
+     }
 
     @After
     public void stop() {

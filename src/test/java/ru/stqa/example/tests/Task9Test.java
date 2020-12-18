@@ -1,4 +1,4 @@
-package ru.stqa.example;
+package ru.stqa.example.tests;
 
 import com.google.common.collect.Ordering;
 import org.junit.After;
