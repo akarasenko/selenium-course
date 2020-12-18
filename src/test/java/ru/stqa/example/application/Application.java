@@ -31,14 +31,14 @@ public class Application {
     }
 
     public void addRandomProductToCart () {
-        var initQuantity = Integer.parseInt(header.cartQuantity().getText());
-        mainPage.randomProduct().click();
-        productPage.addToCartButton().click();
-        wait.until(textToBePresentInElement(header.cartQuantity(), String.valueOf(initQuantity + 1)));
+        var initQuantity = Integer.parseInt(header.cartQuantity.getText());
+        mainPage.randomProduct.click();
+        productPage.addToCartButton.click();
+        wait.until(textToBePresentInElement(header.cartQuantity, String.valueOf(initQuantity + 1)));
     }
 
     public void gotoMainPage() {
-       mainPage.goTo();
+       mainPage.open();
     }
 
     public void quit() {
@@ -46,17 +46,17 @@ public class Application {
     }
 
     public void goToCart() {
-        mainPage.toCartButton().click();
+        mainPage.toCartButton.click();
     }
 
     public int getProductAmountInCart () {
-        return cartPage.productRows().size();
+        return cartPage.productRows.size();
     }
 
     public void deleteRandomProductFromCart() {
-        var productName = cartPage.selectedProductName().getText();
+        var productName = cartPage.selectedProductName.getText();
         var productInTable = cartPage.productInTable(productName);
-        cartPage.deleteButton().click();
+        cartPage.deleteButton.click();
         wait.until(stalenessOf(productInTable));
     }
 }

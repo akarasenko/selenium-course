@@ -1,29 +1,25 @@
 package ru.stqa.example.pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class MainPage extends BasePage {
-    public String mainPageUrl = "http://localhost/litecart/en/";
 
-    public String productXpath = "//div[@id='box-most-popular']//li[@class='product column shadow hover-light'][1]";
-    public String cartXpath = "//div[@id='cart']//a[@class='link']";
+    public String mainPageUrl = "http://localhost/litecart/en/";
 
     public MainPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
 
-    public WebElement randomProduct() {
-        return driver.findElement(By.xpath(productXpath));
-    }
+    @FindBy(xpath = "//div[@id='box-most-popular']//li[@class='product column shadow hover-light'][1]")
+    public WebElement randomProduct;
 
-    public WebElement toCartButton() {
-        return driver.findElement(By.xpath(cartXpath));
-    }
+    @FindBy(xpath = "//div[@id='cart']//a[@class='link']")
+    public WebElement toCartButton;
 
-    public void goTo() {
+    public void open() {
         driver.navigate().to(mainPageUrl);
     }
 }
