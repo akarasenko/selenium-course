@@ -1,12 +1,13 @@
 package ru.stqa.cucumber;
 
+import io.cucumber.java.bs.A;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import ru.stqa.example.application.Application;
 
 
 public class MySteps {
-    public static Application app;
+    public static Application app = new Application();
 
     @When("go to main page")
     public void goToMainPage() {
