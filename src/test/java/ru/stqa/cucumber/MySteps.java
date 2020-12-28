@@ -5,6 +5,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import ru.stqa.example.application.Application;
 
 
@@ -36,5 +37,10 @@ public class MySteps {
         for (int i = 0; i < productAmount; i++) {
             app.deleteRandomProductFromCart();
         }
+    }
+
+    @Then("cart is empty")
+    public void cartIsEmpty() {
+        Assert.assertTrue(app.idCartEmpty());
     }
 }

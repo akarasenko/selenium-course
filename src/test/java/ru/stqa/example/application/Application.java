@@ -1,5 +1,6 @@
 package ru.stqa.example.application;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -58,5 +59,10 @@ public class Application {
         var productInTable = cartPage.productInTable(productName);
         cartPage.deleteButton.click();
         wait.until(stalenessOf(productInTable));
+    }
+
+    public boolean idCartEmpty() {
+        var text = driver.findElement(By.xpath("(//div[@id='checkout-cart-wrapper']//p)[1]")).getText();
+        return text == "There are no items in your cart.";
     }
 }
